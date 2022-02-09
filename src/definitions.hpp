@@ -16,6 +16,7 @@ typedef uint16_t        DALYE_TYPE_UINT16;
 typedef uint32_t        DALYE_TYPE_UINT32;
 typedef uint64_t        DALYE_TYPE_UINT64;
 typedef char            DALYE_TYPE_CHAR;
+typedef const char*     DALYE_TYPE_CCSTR;
 typedef char*           DALYE_TYPE_CSTR;
 typedef wchar_t         DALYE_TYPE_WCHAR;
 typedef unsigned char   DALYE_TYPE_UCHAR;
