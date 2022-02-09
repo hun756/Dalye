@@ -6,9 +6,8 @@
 #include <cheerp/client.h>
 #include <cheerp/clientlib.h>
 
-DALYE_NS_BEGIN
 
-class Engine
+class CHEERP_EXPORT Engine
 {
 public:
     /**
@@ -17,6 +16,7 @@ public:
      * 
      */
     Engine();
+    // Engine(int a) : count(a) {}
 
     /**
      *  @brief
@@ -33,29 +33,28 @@ private:
     DALYE_TYPE_INT32 count;
 };
 
-DALYE_NS_END
-
-///< Count default initialized
-Dalye::Engine::Engine() : count(0) {
+Engine::Engine() : count(0) {
 }
 
-DALYE_TYPE_VOID Dalye::Engine::start() {
+DALYE_TYPE_VOID Engine::start() {
     this->loop();
 }
 
-DALYE_TYPE_VOID Dalye::Engine::loop() {
-    this->count++;
+DALYE_TYPE_VOID Engine::loop() {
+         count++;
 
-    client::document.set_title(std::to_string(count).c_str());
+        client::document.set_title(std::to_string(count).c_str());
 
-    ///< void (TSE::*func)();
-    ///< func = &TSE::loop;
+        ///< void (TSE::*func)();
+        ///< func = &TSE::loop;
 
-    client::requestAnimationFrame(
-            cheerp::Callback([this]() -> DALYE_TYPE_VOID {
-                loop();
-            }
-        )
-    );
-}
+        client::requestAnimationFrame(
+                cheerp::Callback([this]() -> DALYE_TYPE_VOID {
+                    loop();
+                }
+            )
+        );
+    }
+
+
 #endif /* End of include guard : DALYE_ENGINE_MERGE_POINT_HPP */

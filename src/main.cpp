@@ -16,7 +16,7 @@ void webMain() {
     client::document.addEventListener(
             "DOMContentLoaded",
             cheerp::Callback([]() -> DALYE_TYPE_VOID {
-                auto e = new Dalye::Engine();
+                auto e = new Engine();
                 client::console.log("Engine Initilized..");
                 e->start();
             }

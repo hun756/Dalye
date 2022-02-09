@@ -22,12 +22,16 @@ typedef unsigned char   DALYE_TYPE_UCHAR;
 typedef std::string     DALYE_TYPE_STR;
 
 ///< namespaces
-#define CCLIENT_NS_BEGIN namespace client {
+#define CCLIENT_NS_BEGIN namespace [[cheerp::genericjs]] client {
 #define CCLIENT_NS_END }
-#define DALYE_NS_BEGIN namespace Dalye {
+#define DALYE_NS_BEGIN namespace Dalye {    
+#define CDALYE_NS_BEGIN namespace [[cheerp::genericjs]] Dalye {    
 #define DALYE_NS_END }
 
 #define CHEERP_STATIC [[cheerp::static]]
-#define CHERP_JSEXPORT [[cheerp::jsexport]] [[cheerp::genericjs]]
+#define CHEERP_WASM [[cheerp::wasm]]
+#define CHEERP_JSEXPORT [[cheerp::jsexport]]   
+#define CHEERP_GENERICJS [[cheerp::genericjs]]
+#define CHEERP_EXPORT [[cheerp::jsexport]] [[cheerp::genericjs]]
 
 #endif // !DEFINITONS_HPP
