@@ -13,12 +13,22 @@ void webMain() {
 //        e->start();
 //    }));
 
+    Engine* e;
+
     client::document.addEventListener(
             "DOMContentLoaded",
-            cheerp::Callback([]() -> DALYE_TYPE_VOID {
-                auto e = new Engine();
+            cheerp::Callback([&]() -> DALYE_TYPE_VOID {
+                e = new Engine();
                 client::console.log("Engine Initilized..");
                 e->start();
+            }
+        )
+    );
+
+    client::document.addEventListener(
+            "resize",
+            cheerp::Callback([&]() -> DALYE_TYPE_VOID {
+                e->resize();
             }
         )
     );

@@ -28,23 +28,29 @@ public:
     DALYE_TYPE_VOID start();
 
     /**
+     * @brief 
+     * 
+     * @return DALYE_TYPE_VOID 
+     */
+    DALYE_TYPE_VOID resize();
+
+    /**
      *  @brief
      *      Main engine loop 
      */
     DALYE_TYPE_VOID loop();
 private:
     DALYE_TYPE_INT32 count;
-    static client::HTMLCanvasElement* canvas;
+    client::HTMLCanvasElement* canvas;
 };
 
 Engine::Engine() : count(0) {
+    //
 }
 
 DALYE_TYPE_VOID Engine::start() {
-    // DALYE_TYPE_CSTR elemID = new DALYE_TYPE_CHAR[sizeof("elem")];
-    std::string elem_s {"elem"};
-    // strcpy(elemID, "elem");
-    this->canvas = GLUtilities::initialize(elem_s.c_str());
+    DALYE_TYPE_CCSTR elem_s {"elem"};
+    this->canvas = GLUtilities::initialize();
 
     // gl->clearColor(0, 0, 0, 1);
 
@@ -52,22 +58,26 @@ DALYE_TYPE_VOID Engine::start() {
 }
 
 DALYE_TYPE_VOID Engine::loop() {
-        count++;
+    count++;
 
-        client::document.set_title(std::to_string(count).c_str());
+    client::document.set_title(std::to_string(count).c_str());
 
-        gl->clearColor(0,0,0,1);
-	    gl->clear(gl->get_COLOR_BUFFER_BIT());
+    gl->clearColor(0,0,0,1);
+    gl->clear(gl->get_COLOR_BUFFER_BIT());
 
-        ///< void (TSE::*func)();
-        ///< func = &TSE::loop;
-        client::requestAnimationFrame(
-                cheerp::Callback([this]() -> DALYE_TYPE_VOID {
-                    loop();
-                }
-            )
-        );
-        
-    }
+    ///< void (TSE::*func)();
+    ///< func = &TSE::loop;
+    client::requestAnimationFrame(
+            cheerp::Callback([this]() -> DALYE_TYPE_VOID {
+                loop();
+            }
+        )
+    );
+}
+
+DALYE_TYPE_VOID Engine::resize() {
+    this->canvas->set_width(client::innerWidth);
+    this->canvas->set_height(client::innerHeight);
+}
 
 #endif /* End of include guard : DALYE_ENGINE_MERGE_POINT_HPP */

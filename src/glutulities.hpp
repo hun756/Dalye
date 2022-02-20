@@ -11,7 +11,7 @@
 #include "definitions.hpp"
 #include "errors.hpp"
 
-static client::WebGLRenderingContext* gl;
+extern client::WebGLRenderingContext* gl;
 
 class CHEERP_EXPORT GLUtilities
 {
@@ -52,19 +52,21 @@ client::HTMLCanvasElement* GLUtilities::initialize(DALYE_TYPE_CCSTR elem) {
 
     gl = static_cast<client::WebGLRenderingContext*>(canvas->getContext("webgl"));;
     if (!gl) { 
-        GLUtilitiesException("Unable to initialize WebGL");
+        throw GLUtilitiesException("Unable to initialize WebGL");
     }
     return canvas;
 }
 
 client::HTMLCanvasElement* GLUtilities::initialize() {
-    DALYE_TYPE_STR elemId { "canvas" };
+    DALYE_TYPE_CCSTR elemName { "canvas" };
     
-    auto elemStr = new client::String(elemId.c_str());
-    canvas = static_cast<client::HTMLCanvasElement*>(client::document.createElement(elemId.c_str()));
-    client::document.appendChild(canvas);
+    auto elemStr = new client::String(elemName);
+    canvas = static_cast<client::HTMLCanvasElement*>(client::document.createElement(elemName));
 
-    return GLUtilities::initialize(elemId.c_str());
+    client::HTMLElement* body = client::document.get_body();
+    body->appendChild(canvas);
+
+    return GLUtilities::initialize("elem");
 }
 
 #endif /* End of include guard : GLUTILITIES_HPP */
