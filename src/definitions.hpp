@@ -7,14 +7,14 @@
 ///< types
 typedef void            DT_VOID;
 typedef void*           DT_HANDLE;
-typedef float           DT_FLOAT32;
-typedef double          DT_FLOAT64;
-typedef int16_t         DT_INT16;
-typedef int32_t         DT_INT32;
-typedef int64_t         DT_INT64;
-typedef uint16_t        DT_UINT16;
-typedef uint32_t        DT_UINT32;
-typedef uint64_t        DT_UINT64;
+typedef float           DT_F32;
+typedef double          DT_F64;
+typedef int16_t         DT_I16;
+typedef int32_t         DT_I32;
+typedef int64_t         DT_I64;
+typedef uint16_t        DT_U16;
+typedef uint32_t        DT_U32;
+typedef uint64_t        DT_U64;
 typedef char            DT_CHAR;
 typedef const char*     DT_CCSTR;
 typedef char*           DT_CSTR;

@@ -41,7 +41,7 @@ public:
      */
     DT_VOID loop();
 private:
-    DT_INT32 count;
+    DT_I32 count;
     client::HTMLCanvasElement* canvas;
 };
 
