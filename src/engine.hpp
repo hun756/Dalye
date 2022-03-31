@@ -10,6 +10,7 @@
 #include <string.h>
 #include <string>
 
+DALYE_NS_BEGIN
 class CHEERP_EXPORT Engine
 {
 public:
@@ -25,22 +26,22 @@ public:
      *  @brief
      *      Engine starting funciton 
      */
-    DALYE_TYPE_VOID start();
+    DT_VOID start();
 
     /**
      * @brief 
      * 
-     * @return DALYE_TYPE_VOID 
+     * @return DT_VOID 
      */
-    DALYE_TYPE_VOID resize();
+    DT_VOID resize();
 
     /**
      *  @brief
      *      Main engine loop 
      */
-    DALYE_TYPE_VOID loop();
+    DT_VOID loop();
 private:
-    DALYE_TYPE_INT32 count;
+    DT_INT32 count;
     client::HTMLCanvasElement* canvas;
 };
 
@@ -48,8 +49,8 @@ Engine::Engine() : count(0) {
     //
 }
 
-DALYE_TYPE_VOID Engine::start() {
-    DALYE_TYPE_CCSTR elem_s {"elem"};
+DT_VOID Engine::start() {
+    DT_CCSTR elem_s {"elem"};
     this->canvas = GLUtilities::initialize();
 
     // gl->clearColor(0, 0, 0, 1);
@@ -57,7 +58,7 @@ DALYE_TYPE_VOID Engine::start() {
     this->loop();
 }
 
-DALYE_TYPE_VOID Engine::loop() {
+DT_VOID Engine::loop() {
     count++;
 
     client::document.set_title(std::to_string(count).c_str());
@@ -68,16 +69,18 @@ DALYE_TYPE_VOID Engine::loop() {
     ///< void (TSE::*func)();
     ///< func = &TSE::loop;
     client::requestAnimationFrame(
-            cheerp::Callback([this]() -> DALYE_TYPE_VOID {
+            cheerp::Callback([this]() -> DT_VOID {
                 loop();
             }
         )
     );
 }
 
-DALYE_TYPE_VOID Engine::resize() {
+DT_VOID Engine::resize() {
     this->canvas->set_width(client::innerWidth);
     this->canvas->set_height(client::innerHeight);
 }
+
+DALYE_NS_END
 
 #endif /* End of include guard : DALYE_ENGINE_MERGE_POINT_HPP */

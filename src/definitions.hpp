@@ -5,22 +5,22 @@
 #include <string>
 
 ///< types
-typedef void            DALYE_TYPE_VOID;
-typedef void*           DALYE_TYPE_HANDLE;
-typedef float           DALYE_TYPE_FLOAT32;
-typedef double          DALYE_TYPE_FLOAT64;
-typedef int16_t         DALYE_TYPE_INT16;
-typedef int32_t         DALYE_TYPE_INT32;
-typedef int64_t         DALYE_TYPE_INT64;
-typedef uint16_t        DALYE_TYPE_UINT16;
-typedef uint32_t        DALYE_TYPE_UINT32;
-typedef uint64_t        DALYE_TYPE_UINT64;
-typedef char            DALYE_TYPE_CHAR;
-typedef const char*     DALYE_TYPE_CCSTR;
-typedef char*           DALYE_TYPE_CSTR;
-typedef wchar_t         DALYE_TYPE_WCHAR;
-typedef unsigned char   DALYE_TYPE_UCHAR;
-typedef std::string     DALYE_TYPE_STR;
+typedef void            DT_VOID;
+typedef void*           DT_HANDLE;
+typedef float           DT_FLOAT32;
+typedef double          DT_FLOAT64;
+typedef int16_t         DT_INT16;
+typedef int32_t         DT_INT32;
+typedef int64_t         DT_INT64;
+typedef uint16_t        DT_UINT16;
+typedef uint32_t        DT_UINT32;
+typedef uint64_t        DT_UINT64;
+typedef char            DT_CHAR;
+typedef const char*     DT_CCSTR;
+typedef char*           DT_CSTR;
+typedef wchar_t         DT_WCHAR;
+typedef unsigned char   DT_UCHAR;
+typedef std::string     DT_STR;
 
 ///< namespaces
 #define CCLIENT_NS_BEGIN namespace [[cheerp::genericjs]] client {

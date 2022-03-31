@@ -1,7 +1,7 @@
 ///< Application Starting Point
 #include "./engine.hpp"
 
-DALYE_TYPE_VOID __cheerp_main_onload_callback() {
+DT_VOID __cheerp_main_onload_callback() {
 }
 
 void webMain() {
@@ -13,12 +13,12 @@ void webMain() {
 //        e->start();
 //    }));
 
-    Engine* e;
+    Dalye::Engine* e;
 
     client::document.addEventListener(
             "DOMContentLoaded",
-            cheerp::Callback([&]() -> DALYE_TYPE_VOID {
-                e = new Engine();
+            cheerp::Callback([&]() -> DT_VOID {
+                e = new Dalye::Engine();
                 client::console.log("Engine Initilized..");
                 e->start();
             }
@@ -27,7 +27,7 @@ void webMain() {
 
     client::document.addEventListener(
             "resize",
-            cheerp::Callback([&]() -> DALYE_TYPE_VOID {
+            cheerp::Callback([&]() -> DT_VOID {
                 e->resize();
             }
         )
