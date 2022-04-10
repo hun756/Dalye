@@ -49,7 +49,7 @@ public:
     }
 
     static client::HTMLCanvasElement* initialize() /* CHEERP_STATIC */ {
-         DT_CCSTR elemName { "canvas" };
+        DT_CCSTR elemName { "canvas" };
     
         auto elemStr = new client::String(elemName);
         canvas = static_cast<client::HTMLCanvasElement*>(client::document.createElement(elemName));
