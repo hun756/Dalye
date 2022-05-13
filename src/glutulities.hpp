@@ -38,12 +38,15 @@ public:
         canvas = static_cast<client::HTMLCanvasElement*>(client::document.getElementById(elemStr));
 
         if (!canvas) {
-            throw GLUtilitiesException("Cannot find a canvas Element.!");
+            // throw GLUtilitiesException("Cannot find a canvas Element.!");
+            client::console.error("Cannot find a canvas Element.!");
         }
 
         gl = static_cast<client::WebGLRenderingContext*>(canvas->getContext("webgl"));
         if (!gl) { 
-            throw GLUtilitiesException("Unable to initialize WebGL");
+            // throw GLUtilitiesException("Unable to initialize WebGL");
+            client::console.error("CannotUnable to initialize WebGL");
+
         }
         return canvas;
     }

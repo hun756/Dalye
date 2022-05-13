@@ -6,6 +6,7 @@
 
 #include "./definitions.hpp"
 #include "./glutulities.hpp"
+#include "./shader.hpp"
 
 #include <string.h>
 #include <string>
@@ -40,9 +41,12 @@ public:
      *      Main engine loop 
      */
     DT_VOID loop();
+
+    DT_VOID loadShaders();
 private:
     DT_I32 count;
     client::HTMLCanvasElement* canvas;
+    Dalye::Shader* shader;
 };
 
 Engine::Engine() : count(0) {
@@ -53,7 +57,8 @@ DT_VOID Engine::start() {
     DT_CCSTR elem_s {"elem"};
     this->canvas = GLUtilities::initialize();
 
-    // gl->clearColor(0, 0, 0, 1);
+    loadShaders();
+    shader->use();
 
     this->loop();
 }
@@ -77,10 +82,27 @@ DT_VOID Engine::loop() {
 }
 
 DT_VOID Engine::resize() {
-    this->canvas->set_width(client::innerWidth);
-    this->canvas->set_height(client::innerHeight);
+    if (canvas) {
+        this->canvas->set_width(client::innerWidth);
+        this->canvas->set_height(client::innerHeight);
+    }
 }
 
+DT_VOID Engine::loadShaders() {
+    auto vertexShaderSource = DT_STR(R"(
+attribute vec3 a_position;
+void main(){
+    gl_Position = vec4(a_position, 1.0);
+}
+)");
+    auto fragmentShaderSource = DT_STR(R"(
+precision mediump float;
+void main(){
+    gl_FragColor = vec4(1.0);
+}
+)");
+    this->shader = new Dalye::Shader("basic", vertexShaderSource.c_str(), fragmentShaderSource.c_str());
+}
 DALYE_NS_END
 
-#endif /* End of include guard : DALYE_ENGINE_MERGE_POINT_HPP */
+#endif /* End of include guard : DALYE_ENGINE_MERGE_ */
