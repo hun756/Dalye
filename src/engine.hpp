@@ -45,14 +45,13 @@ public:
     DT_VOID loadShaders();
     DT_VOID createBuffer();
 private:
-    DT_I32                      count;
     client::HTMLCanvasElement*  canvas;
     client::WebGLBuffer*        buffer;
     Dalye::Shader*              shader;
 };
 
-Engine::Engine() : count(0) {
-    //
+Engine::Engine() {
+    // default constructor for generic browser
 }
 
 DT_VOID Engine::start() {
@@ -70,10 +69,6 @@ DT_VOID Engine::start() {
 }
 
 DT_VOID Engine::loop() {
-    count++;
-
-    client::document.set_title(std::to_string(count).c_str());
-
     
     gl->clear(gl->get_COLOR_BUFFER_BIT());
 
