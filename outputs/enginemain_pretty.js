@@ -62,29 +62,67 @@ function __ZN5Dalye6Engine11loadShadersEv(Larg0){
 				throw new Error('Error linking shader');;
 			}
 			tmp0.a1=tmp10;
-			Larg0.a2=tmp0;
+			Larg0.a3=tmp0;
 			return;
 		}
 		Lgeptoindexphi=Lgeptoindexphi+1|0;
 		continue;
 	}
 }
+function __ZN5Dalye6Engine12createBufferEv(Larg0){
+	var tmp0=null,Lgeptoindexphi=0,tmp2=null,tmp3=-0.,tmp4=null;
+	Larg0.a2=_gl.createBuffer();
+	tmp0=new Float32Array(9);
+	Lgeptoindexphi=0;
+	while(1){
+		tmp0[Lgeptoindexphi]=__fround(0);
+		Lgeptoindexphi=Lgeptoindexphi+1|0;
+		if(tmp0!==tmp0||9!==(0+Lgeptoindexphi|0))continue;
+		break;
+	}
+	tmp0[4]=__fround(.5);
+	tmp0[6]=__fround(.5);
+	tmp0[7]=__fround(.5);
+	tmp2=_gl;
+	tmp3=+tmp2.ARRAY_BUFFER;
+	tmp2.bindBuffer(tmp3,Larg0.a2);
+	tmp2=_gl;
+	tmp2.vertexAttribPointer(0,3,+tmp2.FLOAT,!!0,0,0);
+	_gl.enableVertexAttribArray(0);
+	tmp2=_gl;
+	tmp3=+tmp2.ARRAY_BUFFER;
+	Lgeptoindexphi=0;
+	tmp4=tmp0;
+	tmp4=tmp4;
+	if((Lgeptoindexphi|0)!==0)tmp4=tmp4.subarray((+(Lgeptoindexphi>>>0)));
+	tmp2.bufferData(tmp3,tmp4,+_gl.STATIC_DRAW);
+	tmp2=_gl;
+	tmp2.bindBuffer(+tmp2.ARRAY_BUFFER,null);
+	_gl.disableVertexAttribArray(0);
+}
 function __ZN5Dalye6Engine4loopEv(Larg0){
-	var tmp0=0,tmp1=null,tmp2=null;
+	var tmp0=0,tmp1=-0.,tmp2=null,tmp3=null;
 	tmp0=(Larg0.i0|0)+1|0;
 	Larg0.i0=tmp0;
-	tmp1={i0:0,i1:0,a2:nullArray};
-	__ZSt9to_stringi(tmp1,tmp0);
-	tmp2=tmp1.a2;
-	tmp2=_cheerpCreate_ZN6client6StringC2EPKc(tmp2,0);
-	document.title=tmp2;
-	_gl.clearColor(0,0,0,1);
-	tmp1=_gl;
-	tmp1.clear((+((tmp1.COLOR_BUFFER_BIT)|0)));
-	tmp1=[{a0:null}];
-	tmp1[0].a0=Larg0;
-	tmp1=cheerpCreateClosure(__ZN6cheerp12InvokeHelperIvE6invokeIZN5Dalye6Engine4loopEvE3$_2JEEEvPT_DpT0_,tmp1[0]);
-	+requestAnimationFrame(tmp1);
+	tmp2={i0:0,i1:0,a2:nullArray};
+	__ZSt9to_stringi(tmp2,tmp0);
+	tmp3=tmp2.a2;
+	tmp3=_cheerpCreate_ZN6client6StringC2EPKc(tmp3,0);
+	document.title=tmp3;
+	tmp2=_gl;
+	tmp2.clear((+((tmp2.COLOR_BUFFER_BIT)|0)));
+	tmp2=_gl;
+	tmp2.vertexAttribPointer(0,3,+tmp2.FLOAT,!!0,0,0);
+	_gl.enableVertexAttribArray(0);
+	tmp2=_gl;
+	tmp1=+tmp2.ARRAY_BUFFER;
+	tmp2.bindBuffer(tmp1,Larg0.a2);
+	tmp2=_gl;
+	tmp2.drawArrays(+tmp2.TRIANGLES,0,3);
+	tmp2=[{a0:null}];
+	tmp2[0].a0=Larg0;
+	tmp2=cheerpCreateClosure(__ZN6cheerp12InvokeHelperIvE6invokeIZN5Dalye6Engine4loopEvE3$_2JEEEvPT_DpT0_,tmp2[0]);
+	+requestAnimationFrame(tmp2);
 }
 function __ZN5Dalye6Engine5startEv(Larg0){
 	var tmp0=null;
@@ -94,8 +132,16 @@ function __ZN5Dalye6Engine5startEv(Larg0){
 	tmp0=document.body;
 	tmp0.appendChild(__ZN5Dalye11GLUtilities6canvasE);
 	Larg0.a1=__ZN5Dalye11GLUtilities10initializeEPKc();
+	_gl.clearColor(0,0,0,1);
 	__ZN5Dalye6Engine11loadShadersEv(Larg0);
-	_gl.useProgram(Larg0.a2.a1);
+	_gl.useProgram(Larg0.a3.a1);
+	__ZN5Dalye6Engine12createBufferEv(Larg0);
+	tmp0=Larg0.a1;
+	if(tmp0!==null){
+		tmp0.width=+innerWidth;
+		Larg0.a1.height=+innerHeight;
+	}
+	_gl.viewport(0,0,+innerWidth,+innerHeight);
 	__ZN5Dalye6Engine4loopEv(Larg0);
 }
 function __ZN5Dalye6Engine6resizeEv(Larg0){
@@ -105,6 +151,7 @@ function __ZN5Dalye6Engine6resizeEv(Larg0){
 		tmp0.width=+innerWidth;
 		Larg0.a1.height=+innerHeight;
 	}
+	_gl.viewport(0,0,+innerWidth,+innerHeight);
 }
 function __ZN5Dalye6EngineC1Ev(Larg0){
 	Larg0.i0=0;
@@ -200,23 +247,14 @@ function __Z7webMainv(){
 }
 function __ZN6cheerp12InvokeHelperIvE6invokeIZ7webMainvE3$_3JEEEvPT_DpT0_(Larg0){
 	var tmp0=null,tmp1=null;
-	tmp0=new Dalye.Engine(undefined);
-	tmp0.i0=0;
-	tmp1=Larg0.a0;
-	tmp1[0]=tmp0;
-	tmp0="Engine Initilized..";
-	console.log(tmp0);
+	tmp1=new Dalye.Engine(undefined);
+	tmp1.i0=0;
 	tmp0=Larg0.a0;
-	tmp0=tmp0[0];
-	"canvas";
-	tmp1="canvas";
-	__ZN5Dalye11GLUtilities6canvasE=document.createElement(tmp1);
-	tmp1=document.body;
-	tmp1.appendChild(__ZN5Dalye11GLUtilities6canvasE);
-	tmp0.a1=__ZN5Dalye11GLUtilities10initializeEPKc();
-	__ZN5Dalye6Engine11loadShadersEv(tmp0);
-	_gl.useProgram(tmp0.a2.a1);
-	__ZN5Dalye6Engine4loopEv(tmp0);
+	tmp0[0]=tmp1;
+	tmp1="Engine Initilized..";
+	console.log(tmp1);
+	tmp1=Larg0.a0;
+	__ZN5Dalye6Engine5startEv(tmp1[0]);
 }
 function __ZN6cheerp12InvokeHelperIvE6invokeIZ7webMainvE3$_4JEEEvPT_DpT0_(Larg0){
 	var tmp0=null,tmp1=null;
@@ -227,6 +265,7 @@ function __ZN6cheerp12InvokeHelperIvE6invokeIZ7webMainvE3$_4JEEEvPT_DpT0_(Larg0)
 		tmp0.width=+innerWidth;
 		tmp1.a1.height=+innerHeight;
 	}
+	_gl.viewport(0,0,+innerWidth,+innerHeight);
 }
 function __ZN10__cxxabiv117__class_type_infoD2Ev(Larg0){
 }
@@ -922,14 +961,8 @@ function __ZNSt6__itoa8__u32toaEjPc(Larg0,Larg1,Marg1){
 }
 var _$pstr$p4=new Uint8Array([68,79,77,67,111,110,116,101,110,116,76,111,97,100,101,100,0]);
 var _$pstr$p5=new Uint8Array([114,101,115,105,122,101,0]);
-var _$pstr$p12=new Uint8Array([69,110,103,105,110,101,32,73,110,105,116,105,108,105,122,101,100,46,46,0]);
-var _$pstr$p8=new Uint8Array([99,97,110,118,97,115,0]);
-var __ZN5Dalye11GLUtilities6canvasE;
 var _gl;
-var _$pstr=new Uint8Array([101,108,101,109,0]);
-var _$pstr$p9=new Uint8Array([67,97,110,110,111,116,32,102,105,110,100,32,97,32,99,97,110,118,97,115,32,69,108,101,109,101,110,116,46,33,0]);
-var _$pstr$p10=new Uint8Array([119,101,98,103,108,0]);
-var _$pstr$p11=new Uint8Array([67,97,110,110,111,116,85,110,97,98,108,101,32,116,111,32,105,110,105,116,105,97,108,105,122,101,32,87,101,98,71,76,0]);
+var _$pstr$p12=new Uint8Array([69,110,103,105,110,101,32,73,110,105,116,105,108,105,122,101,100,46,46,0]);
 var _$pstr$p3=new Uint8Array([98,97,115,105,99,0]);
 var _$pstr$p6=new Uint8Array([71,105,118,101,110,32,115,104,97,100,101,114,32,101,114,114,111,114,32,58,0]);
 var _$pstr$p7=new Uint8Array([83,104,97,100,101,114,32,108,105,110,107,105,110,103,32,101,114,114,111,114,32,58,0]);
@@ -964,6 +997,23 @@ var __ZN10__cxxabiv19Exception9allocatorE$p0=_promotedMalloc$p3;
 var __ZTVSt11logic_error={a0:__ZTISt11logic_error,a1:__ZNSt11logic_errorD2Ev,a2:__ZNSt11logic_errorD0Ev,a3:__ZNKSt11logic_error4whatEv};
 var __ZTVSt12length_error={a0:__ZTISt12length_error,a1:__ZNSt12length_errorD2Ev,a2:__ZNSt12length_errorD0Ev,a3:__ZNKSt11logic_error4whatEv};
 var __ZNSt6__itoaL10cDigitsLutE=new Uint8Array([48,48,48,49,48,50,48,51,48,52,48,53,48,54,48,55,48,56,48,57,49,48,49,49,49,50,49,51,49,52,49,53,49,54,49,55,49,56,49,57,50,48,50,49,50,50,50,51,50,52,50,53,50,54,50,55,50,56,50,57,51,48,51,49,51,50,51,51,51,52,51,53,51,54,51,55,51,56,51,57,52,48,52,49,52,50,52,51,52,52,52,53,52,54,52,55,52,56,52,57,53,48,53,49,53,50,53,51,53,52,53,53,53,54,53,55,53,56,53,57,54,48,54,49,54,50,54,51,54,52,54,53,54,54,54,55,54,56,54,57,55,48,55,49,55,50,55,51,55,52,55,53,55,54,55,55,55,56,55,57,56,48,56,49,56,50,56,51,56,52,56,53,56,54,56,55,56,56,56,57,57,48,57,49,57,50,57,51,57,52,57,53,57,54,57,55,57,56,57,57]);
+var _$pstr$p8=new Uint8Array([99,97,110,118,97,115,0]);
+var __ZN5Dalye11GLUtilities6canvasE;
+var _$pstr=new Uint8Array([101,108,101,109,0]);
+var _$pstr$p9=new Uint8Array([67,97,110,110,111,116,32,102,105,110,100,32,97,32,99,97,110,118,97,115,32,69,108,101,109,101,110,116,46,33,0]);
+var _$pstr$p10=new Uint8Array([119,101,98,103,108,0]);
+var _$pstr$p11=new Uint8Array([67,97,110,110,111,116,85,110,97,98,108,101,32,116,111,32,105,110,105,116,105,97,108,105,122,101,32,87,101,98,71,76,0]);
+function construct_literal3(){
+	this.a0=null;
+	this.a1=null;
+	this.a2=null;
+	this.a3=null;
+	this.a4=null;
+	this.a5=null;
+	this.a6=null;
+	this.a7=null;
+	this.a8=null;
+}
 function constructor_struct$p_ZN10__cxxabiv19ExceptionE(){
 	this.a0=null;
 	this.a1=null;
@@ -994,17 +1044,6 @@ function constructor_struct$p_ZN10__cxxabiv119__dynamic_cast_infoE(){
 	this.i14=0;
 	this.i15=0;
 }
-function construct_literal12(){
-	this.a0=null;
-	this.a1=null;
-	this.a2=null;
-	this.a3=null;
-	this.a4=null;
-	this.a5=null;
-	this.a6=null;
-	this.a7=null;
-	this.a8=null;
-}
 function createArray_struct$p_ZN10__cxxabiv19ExceptionE(e){
 	var r=[];
 	for(var i=0;i<e;i++)
@@ -1026,6 +1065,7 @@ Dalye.Engine=function (){
 	this.i0=0;
 	this.a1=null;
 	this.a2=null;
+	this.a3=null;
 	;
 	this.d=[this];
 	if (arguments.length===1&&arguments[0]===undefined){
@@ -1044,6 +1084,9 @@ Dalye.Engine.prototype.resize=function (){
 };
 Dalye.Engine.prototype.loadShaders=function (){
 	return __ZN5Dalye6Engine11loadShadersEv(this);
+};
+Dalye.Engine.prototype.createBuffer=function (){
+	return __ZN5Dalye6Engine12createBufferEv(this);
 };
 Dalye.Shader=function (a0,a1,a2){
 	this.a0=null;

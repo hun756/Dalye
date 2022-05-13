@@ -43,10 +43,12 @@ public:
     DT_VOID loop();
 
     DT_VOID loadShaders();
+    DT_VOID createBuffer();
 private:
-    DT_I32 count;
-    client::HTMLCanvasElement* canvas;
-    Dalye::Shader* shader;
+    DT_I32                      count;
+    client::HTMLCanvasElement*  canvas;
+    client::WebGLBuffer*        buffer;
+    Dalye::Shader*              shader;
 };
 
 Engine::Engine() : count(0) {
@@ -57,9 +59,13 @@ DT_VOID Engine::start() {
     DT_CCSTR elem_s {"elem"};
     this->canvas = GLUtilities::initialize();
 
+    gl->clearColor(0,0,0,1);
+
     loadShaders();
     shader->use();
 
+    createBuffer();
+    this->resize();
     this->loop();
 }
 
@@ -68,8 +74,14 @@ DT_VOID Engine::loop() {
 
     client::document.set_title(std::to_string(count).c_str());
 
-    gl->clearColor(0,0,0,1);
+    
     gl->clear(gl->get_COLOR_BUFFER_BIT());
+
+    gl->vertexAttribPointer(0, 3, gl->get_FLOAT(), false, 0 ,0);
+    gl->enableVertexAttribArray(0);
+
+    gl->bindBuffer(gl->get_ARRAY_BUFFER(), this->buffer);
+    gl->drawArrays(gl->get_TRIANGLES(), 0, 3);
 
     ///< void (TSE::*func)();
     ///< func = &TSE::loop;
@@ -86,6 +98,8 @@ DT_VOID Engine::resize() {
         this->canvas->set_width(client::innerWidth);
         this->canvas->set_height(client::innerHeight);
     }
+
+    gl->viewport(0, 0, client::innerWidth, client::innerHeight);
 }
 
 DT_VOID Engine::loadShaders() {
@@ -103,6 +117,26 @@ void main(){
 )");
     this->shader = new Dalye::Shader("basic", vertexShaderSource.c_str(), fragmentShaderSource.c_str());
 }
+
+DT_VOID Engine::createBuffer() {
+    this->buffer = gl->createBuffer();
+
+    float vertices[] {
+        0.0, 0.0, 0.0,
+        0.0, 0.5, 0.0,
+        0.5, 0.5, 0.0
+    };
+
+    gl->bindBuffer(gl->get_ARRAY_BUFFER(), this->buffer);
+    gl->vertexAttribPointer(0, 3, gl->get_FLOAT(), false, 0 ,0);
+    gl->enableVertexAttribArray(0);
+
+    gl->bufferData(gl->get_ARRAY_BUFFER(), cheerp::MakeTypedArray(vertices), gl->get_STATIC_DRAW());
+
+    gl->bindBuffer(gl->get_ARRAY_BUFFER(), nullptr);
+    gl->disableVertexAttribArray(0);
+}
+
 DALYE_NS_END
 
 #endif /* End of include guard : DALYE_ENGINE_MERGE_ */
